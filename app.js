@@ -615,7 +615,7 @@ function renderSale(){
           </div>
         </div>`).join('')
       }
-      ${cart.length ? `<div class="sum-total"><span>实收合计</span><span style="color:var(--pink)">${money(cart.reduce((a,b)=>a*(b.actual!=null?b.actual:b.price)*b.qty,0))}</span></div>` : ''}
+      ${cart.length ? `<div class="sum-total"><span>实收合计</span><span style="color:var(--pink)">${money(cart.reduce((a,b)=>a+(b.actual!=null?b.actual:b.price)*b.qty,0))}</span></div>` : ''}
     </div>
     ${cart.length ? `<button class="btn btn-primary btn-block" onclick="checkout()">💳 结算</button>` : ''}
     <div class="card" style="margin-top:12px">
@@ -801,7 +801,7 @@ function setActual(i,v){
   const n = parseFloat(v);
   if(!isNaN(n) && n>=0){ cart[i].actual = n; }
   // 不立即 render 避免输入框失焦，只更新合计
-  const total = cart.reduce((a,b)=>a*(b.actual!=null?b.actual:b.price)*b.qty,0);
+  const total = cart.reduce((a,b)=>a+(b.actual!=null?b.actual:b.price)*b.qty,0);
   const st = document.querySelector('.sum-total span:last-child');
   if(st) st.textContent = money(total);
   // 更新优惠标签
@@ -822,7 +822,7 @@ function setActual(i,v){
 function checkout(){
   if(cart.length===0){ toast('购物车为空'); return; }
   // 实际成交总价 + 实际利润（用 actual 算）
-  const total = cart.reduce((a,b)=>a*(b.actual!=null?b.actual:b.price)*b.qty,0);
+  const total = cart.reduce((a,b)=>a+(b.actual!=null?b.actual:b.price)*b.qty,0);
   const profit = cart.reduce((a,b)=>a+((b.actual!=null?b.actual:b.price)-b.cost)*b.qty,0);
   const mid = saleMemberId;
   const member = mid ? DB.members.find(m=>m.id===mid) : null;
