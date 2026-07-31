@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="元宝家">
+<meta name="theme-color" content="#FF6FA5">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>元宝家婴童店工作台</title>
+<style>
+:root{
+  --pink:#FF6FA5; --pink-soft:#FFC2DC; --pink-bg:#FFF0F6;
+  --purple:#A78BFA; --purple-soft:#DDD6FE; --purple-bg:#F5F3FF;
+  --yellow:#FFD93D; --yellow-bg:#FFF8E1;
+  --mint:#6EE7B7; --mint-bg:#E6FFF6;
+  --blue:#7DD3FC; --blue-bg:#EFF6FF;
+  --orange:#FFB366; --coral:#FF8E72;
+  --ink:#4A2C5A; --ink-soft:#7A5C8A; --line:#F3E8F7;
+  --card:#FFFFFF; --shadow:0 8px 24px rgba(255,111,165,.12);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
+  background:linear-gradient(135deg,var(--pink-bg),var(--purple-bg));
+  color:var(--ink);overflow:hidden;font-size:14px;
+  padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);
+}
+/* 滚动条 */
+::-webkit-scrollbar{width:0;height:0}
+
+/* ===== 整体左右结构 ===== */
+.app{display:flex;height:100vh;width:100vw}
+.sidebar{
+  width:96px;background:linear-gradient(180deg,#FF6FA5,#A78BFA);
+  display:flex;flex-direction:column;align-items:center;
+  padding:14px 0 18px;gap:6px;flex-shrink:0;
+  box-shadow:4px 0 20px rgba(167,139,250,.25);z-index:10;
+}
+.logo{
+  width:60px;height:60px;border-radius:20px;background:#FFF;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--pink);margin-bottom:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.logo .emoji{font-size:26px;line-height:1}
+.nav-btn{
+  width:72px;padding:10px 0;border-radius:16px;background:rgba(255,255,255,.18);
+  border:none;color:#fff;font-size:11px;font-weight:600;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  transition:all .2s;
+}
+.nav-btn .ico{font-size:20px;line-height:1}
+.nav-btn.active{background:#fff;color:var(--pink);box-shadow:0 4px 12px rgba(0,0,0,.15);transform:scale(1.04)}
+.nav-btn:active{transform:scale(.94)}
+
+.main{flex:1;overflow-y:auto;overflow-x:hidden;padding:14px 14px 30px}
+.page{display:none;animation:fade .25s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ===== 通用组件 ===== */
+.h-title{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.h-title .sub{font-size:11px;font-weight:500;color:var(--ink-soft);background:#fff;padding:3px 10px;border-radius:20px}
+.card{background:var(--card);border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.btn{
+  border:none;border-radius:14px;padding:11px 14px;font-size:13px;font-weight:700;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;
+}
+.btn:active{transform:scale(.95)}
+.btn-primary{background:linear-gradient(135deg,var(--pink),#FF8FB8);color:#fff;box-shadow:0 4px 12px rgba(255,111,165,.35)}
+.btn-purple{background:linear-gradient(135deg,var(--purple),#C4B5FD);color:#fff;box-shadow:0 4px 12px rgba(167,139,250,.35)}
+.btn-mint{background:linear-gradient(135deg,var(--mint),#34D399);color:#fff}
+.btn-yellow{background:linear-gradient(135deg,var(--yellow),#FFB347);color:#7A4A00}
+.btn-ghost{background:#F3E8F7;color:var(--ink)}
+.btn-danger{background:#FFE0E0;color:#E63946}
+.btn-block{width:100%}
+.btn-sm{padding:7px 10px;font-size:12px;border-radius:11px}
+
+input,select,textarea{
+  width:100%;border:2px solid var(--line);border-radius:12px;padding:10px 12px;
+  font-size:13px;background:#fff;color:var(--ink);font-family:inherit;outline:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--pink)}
+label{font-size:11px;font-weight:700;color:var(--ink-soft);display:block;margin-bottom:4px}
+.field{margin-bottom:10px}
+
+/* 统计卡 */
+.stat{border-radius:18px;padding:14px;color:#fff;position:relative;overflow:hidden}
+.stat .v{font-size:22px;font-weight:800;margin-top:4px}
+.stat .k{font-size:11px;opacity:.92}
+.stat .emoji{position:absolute;right:8px;bottom:4px;font-size:36px;opacity:.3}
+.s-pink{background:linear-gradient(135deg,#FF6FA5,#FF8FB8)}
+.s-purple{background:linear-gradient(135deg,#A78BFA,#C4B5FD)}
+.s-mint{background:linear-gradient(135deg,#6EE7B7,#34D399)}
+.s-yellow{background:linear-gradient(135deg,#FFD93D,#FFB347)}
+.s-blue{background:linear-gradient(135deg,#7DD3FC,#38BDF8)}
+.s-coral{background:linear-gradient(135deg,#FF8E72,#FFB366)}
+
+/* 标签chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  padding:6px 12px;border-radius:20px;background:#F3E8F7;font-size:12px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;border:2px solid transparent;transition:all .15s;
+}
+.chip.active{background:var(--pink);color:#fff;border-color:#fff;box-shadow:0 2px 8px rgba(255,111,165,.4)}
+.chip:active{transform:scale(.92)}
+.chip-small{padding:4px 9px;font-size:11px}
+
+/* 商品列表项 */
+.prod-item{
+  background:#fff;border-radius:16px;padding:12px;margin-bottom:10px;box-shadow:var(--shadow);
+  display:flex;gap:10px;position:relative;
+}
+.prod-thumb{width:62px;height:62px;border-radius:14px;object-fit:cover;background:var(--pink-bg);flex-shrink:0}
+.prod-info{flex:1;min-width:0}
+.prod-name{font-size:14px;font-weight:800;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+.t-lian{background:#FFE0EC;color:#E63979}
+.t-fen{background:#E0F2FE;color:#0284C7}
+.t-chun{background:#E6FFF6;color:#059669}
+.t-xia{background:#FFF8E1;color:#B45309}
+.t-qiu{background:#FFE4D6;color:#C2410C}
+.t-dong{background:#E0E7FF;color:#4338CA}
+.prod-meta{font-size:11px;color:var(--ink-soft);margin-top:4px;line-height:1.5}
+.prod-bar{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.icon-x{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:#FFE0E0;color:#E63946;border:none;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.icon-x:active{transform:scale(.85)}
+
+/* 尺码多选网格 */
+.size-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:6px}
+.size-opt{padding:7px 0;border-radius:10px;background:#F3E8F7;font-size:12px;font-weight:700;text-align:center;cursor:pointer;color:var(--ink-soft);border:2px solid transparent}
+.size-opt.active{background:var(--purple);color:#fff;border-color:#fff}
+.size-opt:active{transform:scale(.9)}
+
+/* Modal */
+.modal-mask{
+  position:fixed;inset:0;background:rgba(74,44,90,.5);backdrop-filter:blur(4px);
+  z-index:100;display:none;align-items:flex-end;justify-content:center;
+}
+.modal-mask.show{display:flex;animation:fade .2s}
+.modal{
+  background:#fff;width:100%;max-width:520px;border-radius:26px 26px 0 0;
+  padding:16px 16px calc(20px + env(safe-area-inset-bottom));max-height:90vh;overflow-y:auto;
+  animation:slideUp .3s ease;
+}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.modal-head h3{font-size:17px;font-weight:800}
+.modal-close{width:32px;height:32px;border-radius:50%;background:#F3E8F7;border:none;font-size:16px;cursor:pointer;color:var(--ink)}
+
+/* 照片上传 */
+.photo-up{
+  width:100%;aspect-ratio:16/9;border-radius:14px;border:2px dashed var(--pink-soft);
+  background:var(--pink-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;color:var(--pink);cursor:pointer;overflow:hidden;position:relative;
+}
+.photo-up img{width:100%;height:100%;object-fit:cover}
+.photo-up .tip{font-size:11px;color:var(--ink-soft)}
+
+/* 会员卡 */
+.member-card{
+  background:linear-gradient(135deg,#A78BFA,#FF6FA5);border-radius:20px;padding:16px;color:#fff;
+  position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(167,139,250,.35);
+}
+.member-card .av{width:50px;height:50px;border-radius:50%;background:#fff;color:var(--purple);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800}
+.member-card .name{font-size:16px;font-weight:800}
+.member-card .pts{font-size:28px;font-weight:900;margin-top:6px}
+.member-card .pts-l{font-size:11px;opacity:.9}
+
+/* tab 段 */
+.seg{display:flex;background:#F3E8F7;border-radius:14px;padding:3px;gap:3px;margin-bottom:12px}
+.seg button{flex:1;padding:8px;border:none;border-radius:11px;background:transparent;font-size:12px;font-weight:700;color:var(--ink-soft);cursor:pointer}
+.seg button.active{background:#fff;color:var(--pink);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+
+/* 提示 */
+.toast{
+  position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(74,44,90,.92);
+  color:#fff;padding:12px 20px;border-radius:14px;font-size:13px;z-index:999;opacity:0;transition:.25s;pointer-events:none;
+}
+.toast.show{opacity:1}
+
+.empty{text-align:center;padding:40px 10px;color:var(--ink-soft)}
+.empty .emoji{font-size:46px;display:block;margin-bottom:8px}
+
+/* 列表行 */
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:none}
+.row .k{font-size:13px;color:var(--ink-soft)}
+.row .v{font-size:13px;font-weight:700}
+.pill{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700}
+
+/* 颜色选项 */
+.color-pick{display:flex;gap:6px;flex-wrap:wrap}
+.color-opt{width:28px;height:28px;border-radius:50%;cursor:pointer;border:3px solid #fff;box-shadow:0 0 0 2px var(--line)}
+.color-opt.active{box-shadow:0 0 0 2px var(--pink)}
+
+/* 小计 */
+.sum-line{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;color:var(--ink-soft)}
+.sum-line b{color:var(--ink)}
+.sum-total{display:flex;justify-content:space-between;font-size:15px;font-weight:800;padding-top:8px;border-top:2px dashed var(--line);margin-top:6px}
+
+/* 数字大 */
+.big-num{font-size:20px;font-weight:900}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- 左侧导航 -->
+  <aside class="sidebar">
+    <div class="logo"><span class="emoji">👶</span>元宝家</div>
+    <button class="nav-btn active" data-page="dashboard"><span class="ico">🏠</span>总览</button>
+    <button class="nav-btn" data-page="inventory"><span class="ico">👗</span>商品</button>
+    <button class="nav-btn" data-page="sale"><span class="ico">💰</span>收银</button>
+    <button class="nav-btn" data-page="member"><span class="ico">💝</span>会员</button>
+    <button class="nav-btn" data-page="points"><span class="ico">🎁</span>积分</button>
+    <button class="nav-btn" data-page="redeem"><span class="ico">🎟️</span>兑换</button>
+  </aside>
+
+  <!-- 主区域 -->
+  <main class="main" id="main">
+    <!-- 各页面由 JS 渲染 -->
+  </main>
+</div>
+
+<!-- 通用 Modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
