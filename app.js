@@ -599,17 +599,23 @@ function renderSale(){
       <div class="h-title" style="font-size:15px;margin-bottom:8px">🛒 购物车 ${cart.length?'· '+cart.reduce((a,b)=>a+b.qty,0)+'件':''}</div>
       ${cart.length===0 ? '<div class="empty" style="padding:20px"><span class="emoji">🧺</span>购物车空空如也</div>' :
         cart.map((it,i)=>`
-        <div class="row">
-          <div><div class="v" style="font-size:13px">${esc(it.name)} (${it.size}码)</div><div class="k" style="font-size:11px">${money(it.price)} × ${it.qty}</div></div>
+        <div class="row" style="flex-wrap:wrap">
+          <div style="flex:1;min-width:120px"><div class="v" style="font-size:13px">${esc(it.name)} (${it.size}码)</div><div class="k" style="font-size:11px">定价 ${money(it.price)} · 拿货 ${money(it.cost)}</div></div>
           <div style="display:flex;align-items:center;gap:6px">
             <button class="btn btn-ghost btn-sm" onclick="cartQty(${i},-1)">−</button>
             <span class="big-num" style="font-size:14px">${it.qty}</span>
             <button class="btn btn-mint btn-sm" onclick="cartQty(${i},1)">+</button>
             <button class="btn btn-danger btn-sm" onclick="cartDel(${i})">✕</button>
           </div>
+          <div style="width:100%;margin-top:6px;display:flex;align-items:center;gap:6px">
+            <span style="font-size:11px;color:var(--ink-soft);font-weight:700">实收单价</span>
+            <input type="number" inputmode="decimal" value="${it.actual!=null?it.actual:it.price}" step="0.01" min="0" onchange="setActual(${i},this.value)" oninput="setActual(${i},this.value)" style="width:90px;padding:6px 8px;font-size:13px">
+            <span style="font-size:11px;color:var(--ink-soft)">元</span>
+            ${it.actual!=null && it.actual<it.price ? `<span class="pill" style="background:#FFE0E0;color:#E63946">优惠${money(it.price-it.actual)}</span>` : ''}
+          </div>
         </div>`).join('')
       }
-      ${cart.length ? `<div class="sum-total"><span>合计</span><span style="color:var(--pink)">${money(cart.reduce((a,b)=>a+b.price*b.qty,0))}</span></div>` : ''}
+      ${cart.length ? `<div class="sum-total"><span>实收合计</span><span style="color:var(--pink)">${money(cart.reduce((a,b)=>a*(b.actual!=null?b.actual:b.price)*b.qty,0))}</span></div>` : ''}
     </div>
     ${cart.length ? `<button class="btn btn-primary btn-block" onclick="checkout()">💳 结算</button>` : ''}
     <div class="card" style="margin-top:12px">
@@ -784,20 +790,43 @@ function addToCart(pid, size){
     if(ex.qty >= (p.sizes[size]||0)){ toast('超过库存'); return; }
     ex.qty++;
   }else{
-    cart.push({pid, name:p.name, size, qty:1, price:p.price, cost:p.cost});
+    cart.push({pid, name:p.name, size, qty:1, price:p.price, cost:p.cost, actual:p.price});  // actual=实际成交单价，默认=定价
   }
   render();
 }
 function cartQty(i,d){ cart[i].qty+=d; if(cart[i].qty<=0) cart.splice(i,1); render(); }
 function cartDel(i){ cart.splice(i,1); render(); }
+// 设置实际成交单价（顾客讨价还价后便宜了）
+function setActual(i,v){
+  const n = parseFloat(v);
+  if(!isNaN(n) && n>=0){ cart[i].actual = n; }
+  // 不立即 render 避免输入框失焦，只更新合计
+  const total = cart.reduce((a,b)=>a*(b.actual!=null?b.actual:b.price)*b.qty,0);
+  const st = document.querySelector('.sum-total span:last-child');
+  if(st) st.textContent = money(total);
+  // 更新优惠标签
+  const row = document.querySelectorAll('.card .row')[i];
+  if(row){
+    const pill = row.querySelector('.pill');
+    const diff = (cart[i].price||0) - (cart[i].actual!=null?cart[i].actual:cart[i].price);
+    if(diff>0){
+      if(pill){ pill.textContent = '优惠'+money(diff); pill.style.display=''; }
+      else {
+        const wrap = row.querySelector('div:last-child');
+        if(wrap){ const p=document.createElement('span'); p.className='pill'; p.style.cssText='background:#FFE0E0;color:#E63946'; p.textContent='优惠'+money(diff); wrap.appendChild(p); }
+      }
+    } else if(pill){ pill.style.display='none'; }
+  }
+}
 
 function checkout(){
   if(cart.length===0){ toast('购物车为空'); return; }
-  const total = cart.reduce((a,b)=>a+b.price*b.qty,0);
-  const profit = cart.reduce((a,b)=>a+(b.price-b.cost)*b.qty,0);
+  // 实际成交总价 + 实际利润（用 actual 算）
+  const total = cart.reduce((a,b)=>a*(b.actual!=null?b.actual:b.price)*b.qty,0);
+  const profit = cart.reduce((a,b)=>a+((b.actual!=null?b.actual:b.price)-b.cost)*b.qty,0);
   const mid = saleMemberId;
   const member = mid ? DB.members.find(m=>m.id===mid) : null;
-  // 积分规则：本人消费1元得1分
+  // 积分规则：本人消费1元得1分（按实际成交价）
   let pointsEarned = 0;
   let referrerBonus = 0;
   if(member){
@@ -819,7 +848,7 @@ function checkout(){
   });
   DB.sales.push({
     id:uid(), memberId:mid, memberName:member?member.name:'散客',
-    items:cart.map(c=>({pid:c.pid,name:c.name,qty:c.qty,price:c.price,cost:c.cost,size:c.size})),
+    items:cart.map(c=>({pid:c.pid,name:c.name,qty:c.qty,price:c.price,actual:c.actual!=null?c.actual:c.price,cost:c.cost,size:c.size})),
     total, profit, pointsEarned, referrerBonus, time:Date.now()
   });
   cart = []; saleMemberId='';
