@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>快团团+1688 开团实操指南 · 元宝家</title>
+<style>
+:root{
+  --pink:#FF6FA5; --pink-bg:#FFF0F6; --purple:#A78BFA; --purple-bg:#F5F3FF;
+  --yellow:#FFD93D; --yellow-bg:#FFF8E1; --mint:#6EE7B7; --mint-bg:#E6FFF6;
+  --ink:#4A2C5A; --ink-soft:#7A5C8A; --line:#F3E8F7;
+  --card:#fff; --shadow:0 8px 24px rgba(255,111,165,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
+  background:linear-gradient(135deg,var(--pink-bg),var(--purple-bg));
+  color:var(--ink);line-height:1.6;padding:16px 14px calc(30px + env(safe-area-inset-bottom));
+  font-size:14px;
+}
+h1{font-size:22px;font-weight:800;margin-bottom:4px;background:linear-gradient(135deg,#FF6FA5,#A78BFA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{font-size:12px;color:var(--ink-soft);margin-bottom:16px}
+.card{background:var(--card);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.card h2{font-size:17px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.step{padding:12px 14px;border-radius:14px;margin-bottom:10px;border-left:4px solid var(--pink);background:var(--pink-bg)}
+.step.purple{border-color:var(--purple);background:var(--purple-bg)}
+.step.mint{border-color:#34D399;background:var(--mint-bg)}
+.step.yellow{border-color:#FFB347;background:var(--yellow-bg)}
+.step h3{font-size:14px;font-weight:800;margin-bottom:6px}
+.step .num{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--pink);color:#fff;font-size:12px;font-weight:800;text-align:center;line-height:22px;margin-right:6px}
+.step.purple .num{background:var(--purple)}
+.step.mint .num{background:#34D399}
+.step.yellow .num{background:#FFB347}
+.step ul{padding-left:22px;font-size:13px;color:var(--ink-soft)}
+.step ul li{margin-bottom:4px}
+.step ul li b{color:var(--ink)}
+.tip{background:linear-gradient(135deg,#FFF8E1,#FFE0EC);border-radius:14px;padding:12px 14px;margin-top:10px;font-size:13px;color:#7A4A00;line-height:1.7}
+.tip b{color:#E63979}
+.warn{background:#FFE0E0;border-radius:14px;padding:12px 14px;margin-top:10px;font-size:13px;color:#9B1C1C;line-height:1.7}
+.warn b{color:#7F1D1D}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--pink-bg);color:var(--ink);font-weight:700}
+td b{color:var(--pink)}
+.kpi{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+.kpi .k{background:linear-gradient(135deg,#FF6FA5,#FF8FB8);color:#fff;border-radius:12px;padding:10px;text-align:center}
+.kpi .k:nth-child(2){background:linear-gradient(135deg,#A78BFA,#C4B5FD)}
+.kpi .k:nth-child(3){background:linear-gradient(135deg,#6EE7B7,#34D399)}
+.kpi .v{font-size:18px;font-weight:800}
+.kpi .l{font-size:10px;opacity:.9}
+.quote{border-left:3px solid var(--purple);padding:8px 12px;margin:8px 0;background:var(--purple-bg);border-radius:0 10px 10px 0;font-size:13px;color:var(--ink-soft);font-style:italic}
+a{color:var(--pink);text-decoration:none;font-weight:600}
+.foot{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:20px;padding:16px;background:#fff;border-radius:14px}
+</style>
+</head>
+<body>
+
+<h1>🛒 快团团 + 1688 开团实操指南</h1>
+<div class="sub">元宝家婴童店专属 · 从 0 到 1 开团卖货全流程 · 2025 最新版</div>
+
+<!-- 整体逻辑 -->
+<div class="card">
+  <h2>📌 整体逻辑（先看懂这个）</h2>
+  <div class="quote">快团团是卖货前台，1688 是进货后台。你在 1688 找到货源 → 把商品上架到快团团 → 微信群里开团卖 → 顾客下单后你回 1688 让厂家代发给顾客。</div>
+  <div class="kpi">
+    <div class="k"><div class="v">0元</div><div class="l">开店成本</div></div>
+    <div class="k"><div class="v">0.6%</div><div class="l">平台手续费</div></div>
+    <div class="k"><div class="v">10-30%</div><div class="l">常见利润率</div></div>
+  </div>
+  <table>
+    <tr><th>角色</th><th>做什么</th><th>谁来做</th></tr>
+    <tr><td>前台</td><td>开团卖货、收钱</td><td><b>你（快团团）</b></td></tr>
+    <tr><td>后台</td><td>提供货源、发货</td><td><b>1688 厂家</b></td></tr>
+    <tr><td>流量</td><td>微信群、朋友圈、私域</td><td><b>你</b></td></tr>
+    <tr><td>物流</td><td>厂家直接发给顾客</td><td><b>1688 厂家</b></td></tr>
+  </table>
+  <div class="tip"><b>核心优势：</b>不需要囤货、不需要打包发货、不需要自己联系快递。你只负责选品 + 卖货 + 客服，厂家负责发货。这是「无货源」模式，特别适合宝妈/副业起步。</div>
+</div>
+
+<!-- 第1步 -->
+<div class="card">
+  <h2>🚀 第 1 步：注册成为快团团团长</h2>
+  <div class="step">
+    <h3><span class="num">1</span>找到入口</h3>
+    <ul>
+      <li>微信顶部搜索框搜 <b>「快团团」</b>小程序</li>
+      <li>进入后点底部 <b>「我的」</b> → <b>「申请成为团长」</b></li>
+    </ul>
+  </div>
+  <div class="step purple">
+    <h3><span class="num">2</span>实名认证</h3>
+    <ul>
+      <li><b>个人团长</b>：身份证 + 银行卡（用于提现）</li>
+      <li><b>企业团长</b>：额外上传营业执照 + 对公账户</li>
+      <li>建议你用<b>个人团长</b>起步，元宝家以后做大再升级企业</li>
+    </ul>
+  </div>
+  <div class="step mint">
+    <h3><span class="num">3</span>店铺设置</h3>
+    <ul>
+      <li>店铺名：填 <b>「元宝家婴童店」</b>（跟你工作台同名，统一品牌）</li>
+      <li>LOGO：上传一个粉色婴儿图标（你工作台那个就行）</li>
+      <li>简介：写一句吸引人的话，比如「精选高性价比婴童好物，妈妈放心选」</li>
+      <li>绑定提现银行卡：<b>手续费 0.6%</b>，平台补贴 0.3%，实际只收 0.3%</li>
+    </ul>
+  </div>
+  <div class="tip"><b>⏰ 时间：</b>认证一般 1-2 个工作日通过，急用就选工作日上午提交。</div>
+</div>
+
+<!-- 第2步 -->
+<div class="card">
+  <h2>🎯 第 2 步：在 1688 选货 + 对接厂家</h2>
+  <div class="step yellow">
+    <h3><span class="num">1</span>找货源</h3>
+    <ul>
+      <li>打开 <a href="https://www.1688.com" target="_blank">1688 官网</a> 或 1688 App</li>
+      <li>搜索你要卖的品类，比如<b>「婴儿连体衣 一件代发」</b>「婴童纱布巾 代发」</li>
+      <li>关键词加上 <b>「一件代发」</b>「快团团供货」筛选，确保厂家支持代发</li>
+      <li>看 3 个指标：<b>牛头标（实力商家）</b>、<b>回头率 &gt; 30%</b>、<b>发货时效 &lt; 48h</b></li>
+    </ul>
+  </div>
+  <div class="step">
+    <h3><span class="num">2</span>联系厂家谈合作</h3>
+    <ul>
+      <li>点商品页 <b>「和我联系」</b>，在旺旺里直接问：</li>
+      <li>「<b>支持一件代发吗？发什么快递？</b>」</li>
+      <li>「<b>支持快团团渠道吗？能不能铺货到快团团？</b>」</li>
+      <li>「<b>代发价多少？起批量？是否支持退换？</b>」</li>
+      <li>1688 现在已支持<b>一键铺货到快团团</b>，厂家同意后系统自动同步商品</li>
+    </ul>
+  </div>
+  <div class="step purple">
+    <h3><span class="num">3</span>铺货到快团团（关键步骤）</h3>
+    <ul>
+      <li>1688 商品详情页 → 点 <b>「代发」</b>或 <b>「分销」</b>按钮</li>
+      <li>选择 <b>「铺货到快团团」</b>渠道</li>
+      <li>系统自动把商品图、标题、规格同步到你的快团团后台</li>
+      <li>你只需在快团团里<b>设置售价</b>（建议 1688 进货价的 <b>1.3-1.5 倍</b>）</li>
+      <li>顾客下单后，订单自动推回 1688，厂家发货，物流回填快团团</li>
+    </ul>
+  </div>
+  <div class="warn"><b>⚠️ 避坑：</b>一定要先<b>自己买一件样品</b>看质量！1688 上有厂家图片拍得好看但实物差的。自己验货过关了再上架卖，不然售后会把你拖垮。</div>
+</div>
+
+<!-- 第3步 -->
+<div class="card">
+  <h2>📦 第 3 步：开团（3 分钟操作）</h2>
+  <div class="step">
+    <h3><span class="num">1</span>创建团购</h3>
+    <ul>
+      <li>快团团小程序首页 → 点中间 <b>「一键开团」</b></li>
+      <li>选 <b>「普通团购」</b>（适合固定商品）或 <b>「直播团购」</b>（边播边卖）</li>
+      <li>新手选<b>普通团购</b>就行</li>
+    </ul>
+  </div>
+  <div class="step mint">
+    <h3><span class="num">2</span>填写商品信息</h3>
+    <ul>
+      <li><b>标题</b>：要吸睛，例：「纯棉婴儿连体衣 59-90码 多色可选 工厂直发」</li>
+      <li><b>主图</b>：用 1688 同款的图，或自己拍实物图更真实</li>
+      <li><b>规格</b>：按尺码/颜色分（59/66/73/80/90 等）</li>
+      <li><b>价格</b>：填你要卖的价（已含利润）</li>
+      <li><b>库存</b>：跟 1688 厂家确认库存数后填</li>
+    </ul>
+  </div>
+  <div class="step yellow">
+    <h3><span class="num">3</span>设置活动规则</h3>
+    <ul>
+      <li><b>成团时间</b>：建议 3-7 天</li>
+      <li><b>最低起购量</b>：1 件就行（降低门槛）</li>
+      <li><b>是否允许帮卖</b>：<b>建议开启</b>，设置 10-20% 佣金，让别人帮你卖</li>
+      <li><b>发货时间</b>：写「付款后 48 小时内」（跟厂家对齐）</li>
+    </ul>
+  </div>
+  <div class="step purple">
+    <h3><span class="num">4</span>发布</h3>
+    <ul>
+      <li>检查无误后点 <b>「发布团购」</b></li>
+      <li>团购链接会生成，可以分享到微信群、朋友圈</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 第4步 -->
+<div class="card">
+  <h2>📣 第 4 步：推广引流（核心）</h2>
+  <div class="step">
+    <h3><span class="num">1</span>私域起步（最稳）</h3>
+    <ul>
+      <li>把团购链接发到你的<b>宝妈群、邻居群、同学群</b></li>
+      <li>朋友圈发实拍图 + 限时优惠文案：「工厂直发，比专柜便宜一半，限本周末」</li>
+      <li>每位下单的顾客<b>单独发感谢红包</b>，拉进你的「元宝家宠粉群」</li>
+    </ul>
+  </div>
+  <div class="step mint">
+    <h3><span class="num">2</span>帮卖裂变</h3>
+    <ul>
+      <li>开启「帮卖」后，别的团长可以帮你卖货赚佣金</li>
+      <li>主动找其他宝妈团长合作：「我供货 + 你帮卖，佣金 15%」</li>
+      <li>用你的工作台<b>会员积分系统</b>激励老顾客：介绍朋友下单得 0.5 分/元</li>
+    </ul>
+  </div>
+  <div class="step yellow">
+    <h3><span class="num">3</span>公域引流（进阶）</h3>
+    <ul>
+      <li>小红书发种草笔记：「1688 工厂直供婴儿连体衣评测」</li>
+      <li>抖音拍打包发货视频（即使厂家发货，也可以拍选品过程）</li>
+      <li>引导扫码进你的微信群，再转化为快团团下单</li>
+    </ul>
+  </div>
+  <div class="tip"><b>💡 元宝家专属玩法：</b>用你已有的「元宝家工作台」记录每个帮卖团长和顾客，工作台的<b>会员积分机制</b>刚好可以用来管理帮卖佣金和顾客复购奖励——介绍朋友消费给介绍人 0.5 分/元，完美契合快团团的帮卖裂变逻辑。</div>
+</div>
+
+<!-- 第5步 -->
+<div class="card">
+  <h2>💰 第 5 步：订单发货 + 结算提现</h2>
+  <div class="step">
+    <h3><span class="num">1</span>订单处理</h3>
+    <ul>
+      <li>顾客下单后，订单自动推送到 1688 厂家（如果铺货已对接）</li>
+      <li>厂家发货后，<b>物流单号自动回填</b>到快团团</li>
+      <li>顾客在快团团里就能看到物流，无需你手动操作</li>
+      <li>如果是手动对接（没铺货），需要你在快团团后台导出订单 → 发给厂家 → 手动填物流单号</li>
+    </ul>
+  </div>
+  <div class="step purple">
+    <h3><span class="num">2</span>资金结算</h3>
+    <ul>
+      <li>顾客付款后钱在快团团平台<b>托管</b>，确认收货后才会到你的账户</li>
+      <li>一般 <b>T+1 到 T+7</b> 到账（看平台规则和确认收货时间）</li>
+      <li>提现到银行卡：<b>手续费 0.6%</b>（平台补贴 0.3%，实际 0.3%）</li>
+      <li>例：卖 1000 元，实际到账约 <b>997 元</b></li>
+    </ul>
+  </div>
+  <div class="warn"><b>⚠️ 资金流提醒：</b>你要先垫付给 1688 厂家的货款（厂家发货前你要付款）。所以<b>资金周转</b>要算好：顾客的钱还没到账，你要先付厂家。建议起步选单价 30-80 元的商品，垫资压力小。</div>
+</div>
+
+<!-- 第6步 -->
+<div class="card">
+  <h2>🛡️ 第 6 步：售后与避坑</h2>
+  <div class="step">
+    <h3><span class="num">1</span>售后原则</h3>
+    <ul>
+      <li><b>48 小时内发货</b>（跟厂家确认能兑现）</li>
+      <li>开团前在详情页<b>明确写退换规则</b>：「质量问题包退换，尺码不合可换不退」</li>
+      <li>质量问题：让顾客拍照 → 你转给 1688 厂家 → 厂家补发或退款</li>
+      <li>物流问题：快递单号查不到，主动联系厂家催</li>
+    </ul>
+  </div>
+  <div class="warn">
+    <b>🚫 5 大避坑红线：</b><br>
+    1. <b>不要售假</b>（山寨品牌/仿牌）→ 直接封号<br>
+    2. <b>不要虚假宣传</b>（「100% 纯棉」实际不是）→ 投诉退款<br>
+    3. <b>不要选高售后品类</b>（水果生鲜/贴身内衣）起步 → 退换率 30%+ 会亏<br>
+    4. <b>不要刷屏</b>（一天发 10 条广告）→ 被屏蔽<br>
+    5. <b>不要囤货</b>（除非确认能卖完）→ 一件代发才是无风险模式
+  </div>
+</div>
+
+<!-- 元宝家结合 -->
+<div class="card">
+  <h2>💎 元宝家工作台怎么配合快团团</h2>
+  <table>
+    <tr><th>工作台功能</th><th>快团团场景</th></tr>
+    <tr><td>商品库存管理</td><td>记录每个快团团商品的进货价/售价/库存</td></tr>
+    <tr><td>尺码分类</td><td>连体衣 59-90，分体 73-130，跟快团团规格对齐</td></tr>
+    <tr><td>收银 + 实际成交价</td><td>线下顾客/微信群私下单时记账</td></tr>
+    <tr><td>会员积分</td><td>老顾客复购得 1 分/元，介绍朋友得 0.5 分/元</td></tr>
+    <tr><td>积分兑换</td><td>积分换优惠券/小礼品，刺激复购</td></tr>
+    <tr><td>导出备份</td><td>每周导出 JSON，防止数据丢失</td></tr>
+  </table>
+  <div class="tip"><b>工作台地址：</b>https://yuanbao-shop.github.io/yuanbao-shop/<br>跟快团团是两套独立系统：快团团负责线上卖货收款，工作台负责你自己的库存/会员/利润管理。两者互补，不冲突。</div>
+</div>
+
+<!-- 快速上手 -->
+<div class="card">
+  <h2>⚡ 今天就能做的 5 件事</h2>
+  <div class="step mint">
+    <ol style="padding-left:22px;font-size:13px;color:var(--ink-soft)">
+      <li><b>注册快团团团长</b>（微信搜「快团团」→ 申请 → 传身份证）</li>
+      <li><b>1688 选 3 款品</b>（搜「婴儿连体衣 一件代发」，挑牛头标厂家）</li>
+      <li><b>买样品验货</b>（每款买 1 件自己看质量，约 100 元投入）</li>
+      <li><b>联系厂家谈代发</b>（旺旺问：支持快团团铺货吗？发货时效？）</li>
+      <li><b>开第一个团</b>（先发到自己的微信群试水，3-7 天看效果）</li>
+    </ol>
+  </div>
+  <div class="tip"><b>🎯 第一团建议：</b>选一款<b>单价 30-50 元</b>、<b>人人都需要</b>的婴童必需品（如纱布巾、连体衣），定价 49-69 元，开 5 天团。目标：先跑通流程，不指望第一团赚大钱。</div>
+</div>
+
+<div class="foot">
+  🌸 元宝家婴童店 · 快团团开团实操指南<br>
+  工作台 👉 https://yuanbao-shop.github.io/yuanbao-shop/<br>
+  1688 官网 👉 https://www.1688.com<br>
+  快团团入口 👉 微信小程序搜「快团团」
+</div>
+
+</body>
+</html>
